@@ -1,0 +1,19 @@
+---
+interface Props{
+  title: string,
+  subtitle: string,
+  date: string,
+  img: string
+}
+const {title, subtitle, date, img } = Astro.props
+---
+
+<article class="relative h-full rounded-lg">
+  <div class="absolute rounded-3xl bg-gradient-to-t from-gray-900 w-full h-full"></div>
+  <img src={img} alt="" class="h-full rounded-[4%]">
+  <div class="absolute left-10 bottom-[10%] text-white">
+    <div class="font-extrabold text-lg w-[80%]">{title}</div>
+    <div class="text-sm pt-2 w-[85%]">{subtitle}</div>
+    <div class="text-sm font-light">{date}</div>
+  </div>
+</article>

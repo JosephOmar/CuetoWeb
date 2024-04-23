@@ -1,0 +1,99 @@
+---
+import ArrowLeftS from "@components/icons/ArrowLeftS.astro";
+import SyllabusCard from "./SyllabusCard.astro";
+import ArrowRigthS from "@components/icons/ArrowRigthS.astro";
+interface Props {
+  courses1: string[],
+  courses2: string[],
+  courses3: string[],
+  courses4: string[],
+  courses5: string[],
+  courses6: string[]
+}
+const {courses1, courses2, courses3, courses4, courses5, courses6} = Astro.props
+---
+<section class="relative bg-accentfirst">
+  <div class="max-w-[1050px] mx-auto relative container">
+    <div class="max-w-[1050px] overflow-hidden container">
+      <div class="w-[2100px] flex carousel">
+        <SyllabusCard courses={courses1} index={'01'}/>
+        <SyllabusCard courses={courses2} index={'02'}/>
+        <SyllabusCard courses={courses3} index={'03'}/>
+        <SyllabusCard courses={courses4} index={'04'}/>
+        <SyllabusCard courses={courses5} index={'05'}/>
+        <SyllabusCard courses={courses6} index={'06'}/>
+      </div>
+    </div>
+    <div class="arrow-left h-[40px] w-[40px] lg:h-[60px] lg:w-[60px] rounded-full bg-white flex justify-center items-center text-accentfirstdm absolute bottom-[50%] translate-y-[50%] left-[-80px]">
+        <ArrowLeftS />
+    </div>
+    <div class="arrow-right h-[40px] sw-[40px] lg:h-[60px] lg:w-[60px] rounded-full bg-white flex justify-center items-center text-accentfirstdm absolute bottom-[50%] translate-y-[50%] right-[-80px]">
+        <ArrowRigthS />
+    </div>
+  </div>
+</section>
+<style>
+  @media (width < 1400px ){
+    .container{
+      width: 700px;
+    }
+  }
+  @media (width < 950px ){
+    .container{
+      width: 350px;
+    }
+  }
+  @media (width < 600px ){
+    .arrow-left{
+      display: none;
+    }
+    .arrow-right{
+      display: none;
+    }
+  }
+</style>
+<script>
+  let arrows = document.querySelectorAll('.arrow-left , .arrow-right')
+  let currentPosition = 0
+  arrows.forEach(arrow => {
+    arrow.addEventListener('click', () => {
+      let carousel = arrow.parentNode?.firstElementChild?.firstElementChild as HTMLDivElement;
+      if(arrow.classList.contains('arrow-left')){
+        if(currentPosition == 0){
+          let newElement = carousel.lastElementChild
+          carousel.prepend(newElement as HTMLElement)
+          currentPosition -= 350
+          carousel.style.transform = `translateX(${currentPosition}px)`;
+          carousel.style.transition = 'none';
+          setTimeout(() => {
+            currentPosition += 350
+            carousel.style.transform = `translateX(${currentPosition}px)`;
+            carousel.style.transition = 'transform .5s linear';
+          },0)
+        }else{
+          currentPosition += 350
+          carousel.style.transform = `translateX(${currentPosition}px)`;
+          carousel.style.transition = 'transform .5s linear';
+        }
+      
+      }else if(arrow.classList.contains('arrow-right')){
+        if(currentPosition == -1050){
+          let newElement = carousel.firstElementChild
+          carousel.appendChild(newElement as HTMLElement)
+          currentPosition += 350
+          carousel.style.transform = `translateX(${currentPosition}px)`;
+          carousel.style.transition = 'none';
+          setTimeout(() => {
+            currentPosition -= 350
+            carousel.style.transform = `translateX(${currentPosition}px)`;
+            carousel.style.transition = 'transform .5s linear';
+          },0)
+        }else{
+          currentPosition -= 350
+          carousel.style.transform = `translateX(${currentPosition}px)`;
+          carousel.style.transition = 'transform .5s linear';
+        }
+      }
+    })
+  })
+</script>

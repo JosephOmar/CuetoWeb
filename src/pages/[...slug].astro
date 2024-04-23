@@ -1,0 +1,32 @@
+---
+import Layout from 'src/layouts/Layout.astro';
+import { PROGRAMS } from '@components/Programs/infoPrograms';
+import type { PROGRAM } from '@components/Programs/interfacePrograms';
+import SectionFront from '@components/Programs/SectionFront.astro';
+import ButtonSection from '@components/Programs/ButtonSection.astro';
+import AboutProgram from '@components/Programs/AboutProgram.astro';
+import Functions from '@components/Programs/Functions.astro';
+import LaborField from '@components/Programs/LaborField.astro';
+import Syllabus from '@components/Programs/Syllabus.astro';
+import SyllabusCarousel from '@components/Programs/SyllabusCarousel.astro';
+
+export async function getStaticPaths() {
+  return PROGRAMS.map((program: PROGRAM) => {
+    return {
+      params: { slug: program.slug },
+      props: { ...program }, 
+    };
+  });
+}
+
+const { ...program } = Astro.props;
+---
+<Layout title={program.title}>
+  <SectionFront img={program.imgFront} altImg={program.altImgFront}/>
+  <ButtonSection />
+  <AboutProgram title={program.about} description1={program.descriptionAbout1} description2={program.descriptionAbout2} imgAbout={program.imgAbout} altImgAbout={program.altImgAbout}/>
+  <Functions title={program.functions} description1={program.descriptionfunctions1} description2={program.descriptionfunctions2} />
+  <LaborField description={program.laborFieldDescription} items={program.laborFieldItems}/>
+  <Syllabus title={program.syllabus} description1={program.syllabusDescription1} description2={program.syllabusDescription2} imgSyllabus={program.imgSyllabus} altImgSyllabus={program.altImgSyllabus}/>
+  <SyllabusCarousel courses1={program.cycle1} courses2={program.cycle2} courses3={program.cycle3} courses4={program.cycle4} courses5={program.cycle5} courses6={program.cycle6}/>
+</Layout>

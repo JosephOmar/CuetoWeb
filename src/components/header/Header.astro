@@ -1,0 +1,123 @@
+---
+import { NAVTOPOPTIONS, NAVBOTTOMOPTIONS, PROGRAMS, INSTITUTIONALITEMS, ADMISSIONITEMS } from "./Header";
+import Close from '@components/icons/Close.astro'
+import Menu from '@components/icons/Menu.astro'
+import MenuDrop from './MenuDrop.astro'
+---
+<header class="fixed w-[100vw] z-[1000]">
+  <section class="hidden bg-accentdark text-white lg:block font-robotoMono font-light text-sm ">
+    <div class="max-w-[1300px] w-[80%] mx-auto">
+      <div class="flex justify-between items-center">
+        <div>
+          {
+            NAVTOPOPTIONS.map(option => (
+              <a href={option.link} class="mx-4 hover:text-accentfirst">{option.name}</a>
+            ))
+          }
+        </div>
+        <div><a href="/intranet" class="hover:text-accentfirst">Intranet</a></div>
+      </div>
+    </div>
+  </section>
+  <section class=" bg-accentfirst text-white relative">
+    <div class="max-w-[1300px] w-[80%] mx-auto py-4 lg:py-1">
+      <div class="flex justify-between items-center">
+        <div>
+          <img src="logo1.svg" class="w-[150px] h-[50px]" alt="">
+        </div>
+        <div class="group hidden lg:flex ">
+          {
+            NAVBOTTOMOPTIONS.map((option,index) => (
+              <div class="">
+                <a href={option.link} class="px-4 py-2 hover:bg-accentfirstdm relative nav-item font-roboto">{option.name}
+                  <span class=" w-full h-[2px] bg-green-400 absolute bottom-0 left-0 invisible"></span>
+                </a>  
+                
+                <div class="absolute invisible drop-item">
+                  <div class="w-full h-[25px]"></div>
+                  <div class="flex flex-col pt-3 pb-6 bg-accentfirst">
+                    {
+                      (index === 0 ) ?  
+                        ADMISSIONITEMS.map( item => (
+                          <a href={item.link} class="hover:bg-accentfirstdm px-3 font-roboto">{item.name}</a>
+                        ))
+                        : (index === 1 ) ?
+                        INSTITUTIONALITEMS.map( item => (
+                          <a href={item.link} class="hover:bg-accentfirstdm px-3 font-roboto">{item.name}</a>
+                        )) 
+                        : (index === 2 ) ?
+                        PROGRAMS.map( program => (
+                          <a href={program.link} class="hover:bg-accentfirstdm px-3 font-roboto">{program.name}</a>
+                        )) 
+                        :<div>nada</div> 
+                    }
+                  </div>   
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class="block lg:hidden relative w-[24px] h-[24px]">
+          <Menu class=`absolute block menu`/>
+          <Close class=`absolute hidden close`/>
+        </div>
+      </div>
+    </div>
+    <div class="absolute w-[100vw] h-0 bg-accentdark menu-drop transition-all duration-500 opacity-0 flex justify-center">
+      <MenuDrop />
+    </div>
+  </section>
+</header>
+
+<script>
+
+  let navitems = document.querySelectorAll('.nav-item');
+  navitems.forEach( item => {
+    let navitem = item.children[0];
+    let hiddenItem = item.nextElementSibling;
+    item.addEventListener('mouseover', () => {
+      navitem?.classList.add('group-hover:visible')
+      hiddenItem?.classList.add('group-hover:visible')
+    })
+    item.addEventListener('mouseout', () => {
+      navitem?.classList.remove('group-hover:visible')
+      hiddenItem?.classList.remove('group-hover:visible')
+    })
+    hiddenItem?.addEventListener('mouseover', () => {
+      navitem?.classList.add('group-hover:visible')
+      hiddenItem?.classList.add('group-hover:visible')
+    })
+    hiddenItem?.addEventListener('mouseout', () => {
+      navitem?.classList.remove('group-hover:visible')
+      hiddenItem?.classList.remove('group-hover:visible')
+    })
+  })
+
+  let menu = document.querySelector('.menu') as HTMLElement
+  let close = document.querySelector('.close') as HTMLElement
+  let menuDrop = document.querySelector('.menu-drop') as HTMLElement
+
+  menu?.addEventListener('click', () => {
+    menu?.classList.remove('block')
+    menu?.classList.add('hidden')
+    close?.classList.remove('hidden')
+    close?.classList.add('block')
+    document.body.style.overflow = "hidden";
+    menuDrop?.classList.remove('h-0')
+    menuDrop?.classList.add('h-[100vh]')
+    menuDrop?.classList.remove('opacity-0')
+    menuDrop?.classList.add('opacity-100')
+  })
+
+  close?.addEventListener('click', () => {
+    close?.classList.remove('block')
+    close?.classList.add('hidden')
+    menu?.classList.remove('hidden')
+    menu?.classList.add('block')
+    document.body.style.overflow = "auto";
+    menuDrop?.classList.remove('h-[100vh]')
+    menuDrop?.classList.add('h-0')
+    menuDrop?.classList.remove('opacity-100')
+    menuDrop?.classList.add('opacity-0')
+  })
+</script>

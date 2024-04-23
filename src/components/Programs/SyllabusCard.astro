@@ -1,0 +1,22 @@
+---
+interface Props {
+  courses: string[],
+  index: string
+}
+const {courses, index} = Astro.props
+---
+<article class=" w-[350px] text-white">
+  <div class="flex flex-col pb-6">
+    <div>SEMESTRE</div>
+    <div class="text-6xl font-robotoMono font-extrabold">{index}</div>
+    <span class="w-full h-2 bg-accentdark"></span>
+  </div>
+  <ul>
+    {
+      courses.map(course => (
+        
+        <li class="text-lg p-1">{course}</li>
+      ))
+    }
+  </ul>
+</article>

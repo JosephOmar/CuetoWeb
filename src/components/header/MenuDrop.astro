@@ -1,0 +1,105 @@
+---
+import { PROGRAMS, ADMISSIONITEMS, INSTITUTIONALITEMS } from "./Header";
+import Plus from '@components/icons/Plus.astro'
+import Minus from '@components/icons/Minus.astro'
+import User from "@components/icons/User.astro";
+---
+
+<div class="pt-20 flex flex-col gap-10">
+  <div class="flex flex-col gap-2 w-[320px]">
+    <div class="relative">
+      <div class="drop-title border-white border-2 px-4 flex justify-between">
+        <p>ADMISIÓN</p><Plus class="plus"/><Minus class="hidden minus"/>
+      </div>
+      <div class="drop-items bg-accentfirstdm">
+        <div class=" py-2 flex flex-col">
+          {
+            ADMISSIONITEMS.map(item => (
+              <a href={item.link} class="hover:bg-accentsecond hover:text-black px-2">{item.name}</a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="drop-title border-white border-2 px-4 flex justify-between">
+        <p>INSTITUCIONAL</p><Plus class="plus"/><Minus class="hidden minus"/>
+      </div>
+      <div class="drop-items bg-accentfirstdm">
+        <div class=" py-2 flex flex-col "> 
+          {
+            INSTITUTIONALITEMS.map(item => (
+              <a href={item.link} class="hover:bg-accentsecond hover:text-black px-2">{item.name}</a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="drop-title border-white border-2 px-4 flex justify-between">
+        <p>PROGRAMA DE ESTUDIO</p><Plus class="plus"/><Minus class="hidden minus"/>
+      </div>
+      <div class="drop-items bg-accentfirstdm flex flex-col">
+        <div class=" py-2 flex flex-col "> 
+          {
+            PROGRAMS.map(item => (
+              <a href={item.link} class="hover:bg-accentsecond hover:text-black px-2">{item.name}</a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <a href="" class="flex gap-2 relative">
+      <p>INTRANET</p>
+      <User/>
+      <span class="w-full h-1 bg-accentsecond absolute bottom-0"></span>
+    </a> 
+  </div>
+  <div class="flex justify-center flex-col items-center">
+    <a href="" class="flex gap-2 relative">Publicaciones</a> 
+    <a href="" class="flex gap-2 relative">Bolsa de Trabajo</a> 
+    <a href="" class="flex gap-2 relative">Unidad de Bienestar</a> 
+  </div>
+</div>
+
+<script>
+  let dropTitle = document.querySelectorAll('.drop-title')
+  let dropItems = document.querySelectorAll('.drop-items')
+
+  dropTitle.forEach((title, index) => {
+    title.addEventListener('click', () => {
+      dropItems.forEach((item,idx) => {
+        if(idx !== index ){
+          item.classList.remove('active')
+        }
+      })
+      dropItems[index].classList.toggle('active')
+      title.classList.toggle('active')
+    });
+  });
+</script>
+<style>
+  .drop-items{
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .5s ease;
+  }
+  .drop-items.active{
+    max-height: 300px;
+    background-color: #007BFF;
+  }
+  .drop-title.active .minus{
+    display: block;
+    color: #48EA58;
+  }
+  .drop-title.active {
+    border-color: #007BFF;
+    color: #48EA58;
+  }
+  .drop-title.active .plus{
+    display: none;
+  }
+</style>
+

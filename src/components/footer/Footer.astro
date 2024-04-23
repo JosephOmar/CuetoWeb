@@ -1,0 +1,58 @@
+---
+import { SOCIALICONS, DETAILS, CONTACTS } from "./Footer";
+---
+
+<section class="bg-accentdark pt-8 relative overflow-hidden pb-6 font-robotoMono">
+  <div class="max-w-[1300px] w-[90%] h-full mx-auto grid grid-cols-1 gap-8 relative lg:grid-cols-5 md:grid-cols-2">
+    <div class="col-span-1  h-full flex flex-col justify-between items-center">
+      <div>
+        <img src="logo1.svg" class="w-[150px] h-[80px]" alt="">
+      </div>
+      <ul class="flex justify-start gap-5">
+      {
+        SOCIALICONS.map(social => (
+          <li class="list-none relative pl-[10px]">
+            <a href={social.link} >
+              <img src={social.svg} alt="">
+            </a>
+          </li>
+        ))
+      }
+      </ul>
+    </div>
+    <div class="col-span-1 h-full flex flex-col gap-4 md:items-start text-white font-extralight text-xs tracking-widest items-center">
+      {
+        DETAILS.map(detail => (
+        <a href={detail.link}>{detail.name}</a>
+        ))
+      }     
+    </div>
+    <div class="col-span-1 h-full flex flex-col gap-4 md:items-start items-center text-white font-extralight text-xs tracking-widest">
+      <p class="text-lg font-medium">CONTACTO</p>
+      {
+        CONTACTS.map(contact => (
+          <p>{contact.name}</p>
+        ))
+      }     
+    </div>
+    <div class="col-span-1 lg:col-span-2 h-full flex flex-col justify-end">
+      <div class="flex flex-col md:items-end items-center text-white font-extralight tracking-widest">
+        <p class="text-end text-sm">IESTP CARLOS CUETO FERNANDINI</p>
+        <p class="text-end text-[11px]">El mejor instituto de Lima Norte te da la bienvenida.</p>  
+      </div>
+    </div>
+    <p class="text-[11px] text-white font-extralight tracking-widest absolute bottom-[-15px] right-0">CASI TODOS LOS DERECHS RESERVADOS</p>
+  </div>
+</section>  
+
+<style>
+  li:not(:last-child):before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 19px;
+    background: #939393;
+    right: -15px;
+    top: 0;
+  }
+</style>

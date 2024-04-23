@@ -1,0 +1,12 @@
+---
+interface Props {
+  img: string,
+  altImg: string
+}
+const {img, altImg} = Astro.props
+---
+<section class="relative">
+  <div class="relative">
+    <img src={img} alt={altImg} class="w-full h-[50vh]">
+  </div>
+</section>

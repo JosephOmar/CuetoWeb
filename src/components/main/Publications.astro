@@ -1,0 +1,32 @@
+---
+import CardPublications from "@components/reusable/CardPublications.astro";
+import CardPublicationMain from "@components/reusable/CardPublicationMain.astro";
+import { PUBLICATIONMAIN, PUBLICATIONS } from "./InfoCard";
+---
+<section class="relative pt-20 bg-[#eff2f4] overflow-hidden">
+  <div class="max-w-[1024px] mx-auto  relative z-[600]">
+    <h2 class="text-2xl font-semibold text-white text-center lg:text-5xl md:text-4xl">PUBLICACIONES</h2>
+    <span class="w-10 h-[14px] rounded-[7px] bg-[#69BE28] block mx-auto mb-10"></span>
+    <div class="justify-center mt-10 pb-10 grid grid-cols-5 grid-rows-3 gap-4">
+      
+      {
+        PUBLICATIONMAIN.map(item => (
+          <div class="col-span-3  row-span-3">
+          <CardPublicationMain {...item}/>
+          </div>
+        ))
+      }
+      {
+        PUBLICATIONS.map(item => (
+          <div class="col-span-2 row-span-1">
+            <CardPublications {...item}/>
+          </div>
+        ))
+      }
+    </div>
+    <div class="flex justify-center pb-24">
+      <a class="py-3 px-8 border-[#001c2c] border-[1px] rounded-full font-semibold text-sm hover:text-white hover:bg-[#001c2c] text-[#001c2c]">VER TODOS LAS PUBLICACIONES</a>
+    </div>
+  </div>
+  <div class="bg-accentfirst absolute h-[250px] w-full top-0 z-[2] rounded-br-[300px] transform scale-105"></div>
+</section>

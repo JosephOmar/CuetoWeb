@@ -1,0 +1,93 @@
+---
+import ArrowLeftS from '@components/icons/ArrowLeftS.astro'
+import ArrowRigthS from '@components/icons/ArrowRigthS.astro'
+---
+
+<section class="relative">
+  <div class="relative images-container">
+    <img class="images w-full max-h-[90vh] min-h-[50vh] rounded-bl-[30vh] active" src="Sliders/Main/sliderMain1.webp" alt="">
+    <img class="images w-full max-h-[90vh] min-h-[50vh] rounded-bl-[30vh] " src="Sliders/Main/sliderMain2.webp" alt="">
+    <img class="images w-full max-h-[90vh] min-h-[50vh] rounded-bl-[30vh] " src="Sliders/Main/sliderMain3.webp" alt="">
+    <img class="images w-full max-h-[90vh] min-h-[50vh] rounded-bl-[30vh] " src="Sliders/Main/sliderMain4.webp" alt="">
+  </div>
+  <div class="absolute bottom-4 flex gap-4 left-[50vw] translate-x-[-50%]">
+    <div class="buttons w-4 h-4 rounded-full border-[1px] border-white transition-all active" ></div>
+    <div class="buttons w-4 h-4 rounded-full border-[1px] border-white transition-all " ></div>
+    <div class="buttons w-4 h-4 rounded-full border-[1px] border-white transition-all " ></div>
+    <div class="buttons w-4 h-4 rounded-full border-[1px] border-white transition-all " ></div>
+  </div>
+  <div class="absolute bottom-[20%] left-[20%] flex flex-col">
+    <a class=" button_info bg-accentfirst text-white text-xs font-extrabold px-6 lg:px-14 py-2 lg:py-4 rounded-[20px] mb-4">
+      MÁS INFORMACIÓN
+    </a>
+    <div class="flex gap-6 lg:gap-2">
+      <div class="arrow-leftS h-[40px] w-[40px] lg:h-[60px] lg:w-[60px] rounded-full bg-white flex justify-center items-center text-accentfirstdm">
+        <ArrowLeftS />
+      </div>
+      <div class="arrow-rightS h-[40px] sw-[40px] lg:h-[60px] lg:w-[60px] rounded-full bg-white flex justify-center items-center text-accentfirstdm">
+        <ArrowRigthS />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let images = document.querySelectorAll('.images')
+  let buttons = document.querySelectorAll('.buttons')
+
+  buttons.forEach((button,index) => {
+    button.addEventListener('click', ()=>{
+      buttons.forEach(button2 => {
+        button2.classList.remove('active')
+      })
+      images.forEach(image => {
+        image.classList.remove('active')      
+      })
+      images[index].classList.add('active')
+      button.classList.add('active')
+    })
+  })
+
+  let arrows = document.querySelectorAll('.arrow-leftS, .arrow-rightS');
+
+  arrows.forEach((arrow) => {
+    arrow.addEventListener('click', () => {
+      let currentIndex = Array.from(images).findIndex(image => image.classList.contains('active'));
+      let newIndex=0;
+
+      if (arrow.classList.contains('arrow-leftS')) {
+        newIndex = (currentIndex - 1 + images.length) % images.length;
+      } else if (arrow.classList.contains('arrow-rightS')) {
+        newIndex = (currentIndex + 1) % images.length;
+      }
+
+      (buttons[newIndex] as HTMLButtonElement).click();
+    });
+  });
+
+  setInterval(() => {
+    let currentIndex = Array.from(images).findIndex(image => image.classList.contains('active'));
+      let newIndex=0;
+      newIndex = (currentIndex + 1) % images.length;
+
+      (buttons[newIndex] as HTMLButtonElement).click();
+  },6000)
+</script>
+
+<style>
+  .buttons.active{
+    width: 48px;
+    background-color: #4285F4;
+  }
+
+.images.active{
+  position: relative;
+  opacity: 1;
+  transition: opacity .5s ease-out;
+}
+
+.images {
+  position: absolute;
+  opacity: 0;
+}
+</style>

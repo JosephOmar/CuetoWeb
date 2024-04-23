@@ -1,0 +1,20 @@
+---
+interface Props{
+  name: string,
+  link: string,
+  img: string,
+  alt: string,
+  linkName: string,
+  mobile: string
+}
+const {name, link, img, alt, linkName, mobile} = Astro.props
+---
+
+<div class=`relative hover:scale-105 transition-all mx-auto duration-500 card w-[306px] ${mobile}`>
+  <div class="absolute rounded-3xl bg-gradient-to-t from-gray-950 w-full h-full"></div>
+  <div class=" absolute flex flex-col gap-6 max-w-[150px] bottom-[10%] left-4">
+    <div class="pl-2 font-semibold text-white">{name}</div>
+    <a class="font-semibold px-6 py-2 border-white border-[1px] rounded-full text-xs hover:bg-accentfirst cursor-pointer w-[120px] text-center text-white" href={link} >{linkName}</a>
+  </div>
+  <img class="block w-full rounded-3xl" src={img} alt={alt}>
+</div> 

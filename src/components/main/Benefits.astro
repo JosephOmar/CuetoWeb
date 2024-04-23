@@ -1,0 +1,23 @@
+---
+import BenefitsInfo from "@components/reusable/BenefitsInfo.astro";
+import { REASONS } from "./InfoCard";
+---
+
+<section class="relative pt-10">
+  <div class="max-w-[1024px] mx-auto  relative z-[80]">
+    <h2 class="text-2xl font-semibold text-white dark:text-[#009AA6] text-center lg:text-5xl sm:text-4xl">BENEFICIOS ESTUDIANTILES</h2>
+    <span class="w-10 h-[14px] rounded-[7px] bg-[#69BE28] block mx-auto mb-10"></span>
+    <div class="grid sm:grid-cols-4 grid-cols-2">
+      {
+        REASONS.map(reason => (
+        <BenefitsInfo {...reason}/>
+        ))
+      }
+      
+    </div>
+    <div class="flex justify-center mt-10 pb-10">
+      <a class="py-2 px-14 border-white border-[1px] rounded-full font-semibold hover:text-white hover:bg-[#001c2c] text-white text-sm">VER MÁS</a>
+    </div>
+  </div>
+  <div class="bg-accentfirst absolute h-full w-full bottom-0 z-[10]"></div>
+</section>

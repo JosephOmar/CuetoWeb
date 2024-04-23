@@ -1,0 +1,22 @@
+---
+import { PROGRAMS } from "./InfoCard";
+import InfoCard from '@components/reusable/InfoCard.astro';
+---
+
+<section class="relative overflow-hidden">
+  <div class="max-w-[1024px] mx-auto relative z-[700]">
+    <h2 class="text-2xl font-semibold text-accentfirstdm dark:text-[#009AA6] text-center lg:text-5xl sm:text-4xl">9 PROGRAMAS DE ESTUDIO</h2>
+    <span class="w-10 h-[14px] rounded-[7px] bg-[#69BE28] block mx-auto"></span>
+    <div class="grid grid-cols-1 grid-rows-1 gap-4 pt-20 mb-10 md:grid-cols-2 lg:grid-cols-3 content-center ">
+      {
+        PROGRAMS.map((program) => (
+          <InfoCard {...program}/>
+        ))
+      }
+    </div>
+    <div class="flex justify-center lg:hidden">
+      <a class="py-2 px-6 border-accentfirst border-[2px] rounded-full font-bold text-sm hover:text-white hover:bg-accentfirstdm text-[#001c2c] hover:border-accentdark">VER TODAS LAS CARRERAS</a>
+    </div>
+  </div> 
+  <div class="bg-accentfirst absolute h-[180px] w-full bottom-0 rounded-tl-[300px] transform scale-105"></div>
+</section>
